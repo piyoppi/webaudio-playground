@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+<button onclick="Play()"> Play </button>
+ 
+<script type="text/javascript">
+    window.AudioContext = window.webkitAudioContext||window.AudioContext;
+    var audioctx = new AudioContext();
+     
+    var osc = audioctx.createOscillator();
+    osc.connect(audioctx.destination);
+     
+    function Play() {
+        osc.start();
+    }
+</script>
