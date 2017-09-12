@@ -3,26 +3,31 @@
 <head></head>
 <body>
 <button onclick="Play()"> Play </button>
+<input type="range" id="freq1" min="1" max="500" size="100" value="440" onchange="Setup()"/>
+<input type="range" id="freq2" min="1" max="500" size="100" value="440" onchange="Setup()"/>
+<input type="range" id="gain1" min="1" max="500" size="100" value="440" onchange="Setup()"/>
  
 <script type="text/javascript">
     window.AudioContext = window.webkitAudioContext||window.AudioContext;
     var audioctx = new AudioContext();
      
-    var osc = audioctx.createOscillator();
+    var osc1 = audioctx.createOscillator();
     var osc2 = audioctx.createOscillator();
-    var gain = audioctx.createGain();
-    var gain2 = audioctx.createGain();
-    osc.type="square";
+    var gain1 = audioctx.createGain();
+    osc1.type="sine";
     osc2.type="sine";
-    osc2.frequency.value=1;
-    osc2.connect(gain2);
-    gain2.gain.value = 20;
-    gain2.connect(osc.frequency);
-    osc.connect(gain);
-    gain.connect(audioctx.destination);
+    osc1.connect(gain1);
+    gain1.connect(osc2);
+    osc2.connect(audioctx.destination);
+
+    function Setup(){
+        osc1.frequency.value=parseFloat(document.getElementById("freq1").value);
+        osc2.frequency.value=parseFloat(document.getElementById("freq2").value);
+        gain1.gain.value=parseFloat(document.getElementById("gain1").value);
+    }
      
     function Play() {
-        osc.start();
+        osc1.start();
         osc2.start();
     }
 </script>
