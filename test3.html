@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+<button onclick="Play()"> Play </button>
+ 
+<script type="text/javascript">
+    window.AudioContext = window.webkitAudioContext||window.AudioContext;
+    var audioctx = new AudioContext();
+     
+    var osc = audioctx.createOscillator();
+    var osc2 = audioctx.createOscillator();
+    var gain = audioctx.createGain();
+    var gain2 = audioctx.createGain();
+    osc.type="square";
+    osc2.type="sine";
+    osc2.frequency.value=1;
+    osc2.connect(gain2);
+    gain2.gain.value = 20;
+    gain2.connect(osc.frequency);
+    osc.connect(gain);
+    gain.connect(audioctx.destination);
+     
+    function Play() {
+        osc.start();
+        osc2.start();
+    }
+</script>
