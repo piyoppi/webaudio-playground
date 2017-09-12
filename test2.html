@@ -11,10 +11,13 @@
     var osc = audioctx.createOscillator();
     var osc2 = audioctx.createOscillator();
     var gain = audioctx.createGain();
+    var gain2 = audioctx.createGain();
     osc.type="square";
-    osc2.type="triangle";
-    osc2.frequency.value=10;
-    osc2.connect(osc.frequency);
+    osc2.type="sine";
+    osc2.frequency.value=1;
+    osc2.connect(gain2);
+    gain2.gain.value = 20;
+    gain2.connect(osc.frequency);
     osc.connect(gain);
     gain.connect(audioctx.destination);
      
